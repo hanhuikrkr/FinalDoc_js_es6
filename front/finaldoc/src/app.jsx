@@ -1,5 +1,5 @@
 import './style';
-import { Component } from 'react';
+import { Component } from 'preact';
 import { Provider } from 'mobx-react'
 import { configure } from 'mobx'
 
