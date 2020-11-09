@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-10-30 08:27:35
- * @LastEditTime: 2020-11-10 00:55:05
+ * @LastEditTime: 2020-11-10 01:00:57
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \FinalDoc_js_es6\README.md
@@ -95,3 +95,13 @@ item.number >= this.NavStage - 1 && item.number <= this.NavStage + 2 && (
 * Textarea 多行文本输入组件
 * Progress 进度条组件
 * Switch 开关组件
+* Upload 上传组件
+
+需要修复的问题：
+* 教师端组件全部继承自baseAction，数据请求未分离，数据状态管理混乱
+* 系主任段判断繁琐，需要使用switch替代
+
+ 
+需要完成的阶段任务:
+* 第一阶段所有业务逻辑
+
