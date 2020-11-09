@@ -1,4 +1,5 @@
-import BaseActions from '../component/BaseActions'
+
+import BaseActions from "../util/baseAction";
 import { observable, action, runInAction } from 'mobx'
 
 import * as urls from '../constant/urls'
@@ -249,6 +250,33 @@ class Teacher extends BaseActions {
     }
     return result;
   }
+  /**
+   * 判断是否是审核教师
+   * 返回flag=1/2/null
+   * 1：课题审核
+   */
+  async call_AuditFd_JudgeIfAduit(params){
+    let result = await this.post (urls.API_TEACHER_GET_IF_AUDIT, params)
+    if (result && result.code === 200) {
+      message.success("表单提交成功")
+    } else {
+      console.log("no response")
+    }
+   
+    return result;
+  }
+   /**
+     * t_mamager的post拆分
+     * 
+     */
+  async call_get_topic_list(params){
+    return await this.post(urls.API_SYS_GET_TOPIC_BY_TEACHER_ID,params);
+    
+  }
+
+
+
+  
 }
 
 export default new Teacher()

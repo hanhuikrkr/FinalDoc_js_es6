@@ -1,0 +1,8 @@
+[data-component=t-manage-home] .t-manage-home {
+  flex: 4;
+  overflow: auto;
+}
+
+.manage-home {
+  height: 100%;
+}

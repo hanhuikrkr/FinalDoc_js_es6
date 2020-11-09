@@ -1,4 +1,5 @@
-import BaseActions from '../component/BaseActions'
+
+import BaseActions from "../util/baseAction";
 import { observable, action, runInAction, toJS } from 'mobx'
 import * as urls from '../constant/urls'
 import { message } from 'antd'

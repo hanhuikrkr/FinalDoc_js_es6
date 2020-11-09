@@ -6,23 +6,23 @@ import { Component } from 'react'
 export default class BaseActions extends Component {
   
 
-  get = async (api = '', params = {}) => {
+  get = async (api , params) => {
     let url
     if (api.indexOf('?') === -1) {
       url = api + `?${param(params)}`
     } else {
       url = api + `&${param(params)}`
     }
-    let data = await request(url, {})
+    let data = await request(url, params  )
     return toJS(data)
   }
 
-  post = async (api = '', params = {}) => {
+  post = async (api, params) => {
     return await request(
       api,
       {
         method: 'POST',
-        params
+        data:params
       },
 
     )

@@ -1,4 +1,5 @@
-import BaseActions from '../component/BaseActions'
+
+import BaseActions from "../util/baseAction";
 import { observable, action, runInAction } from 'mobx'
 import axios from 'axios'
 import * as urls from '../constant/urls'

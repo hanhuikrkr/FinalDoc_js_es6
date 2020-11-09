@@ -1,18 +1,17 @@
-import BaseActions from '../component/BaseActions'
-import { observable, action, runInAction } from 'mobx'
-import * as urls from '../constant/urls'
-import axios from 'axios'
-import { message } from 'antd'
+import BaseActions from "../util/baseAction";
+import { observable, action, runInAction } from "mobx";
+import * as urls from "../constant/urls";
+import axios from "axios";
+import { message } from "antd";
+import token from "../util/token.js";
+import { createHashHistory } from "history";
 
-import token from '../util/token.js'
-import { route } from 'preact-router'
-
-var ROLE = 2
+const history = createHashHistory();
+var ROLE = 2;
 
 class User extends BaseActions {
-
   @observable
-  usr = {}
+  usr = {};
   // usr = {
   //   name:'沈珊瑚',
   //   uid: '20130006',
@@ -22,38 +21,45 @@ class User extends BaseActions {
 
   @observable
   //站内信
-  msgList = []
-
+  msgList = [];
 
   @observable
   //通知列表 index 未读通知所处位置
-  noticeList = { index: null, data: [] }
+  noticeList = { index: null, data: [] };
 
   @action
   getUser() {
-    return this.usr
+    return this.usr;
   }
-
-
 
   @action
   async login(params) {
-    const r = await this.post(urls.API_USR_LOGIN, params)
-    console.log(r)
+    console.log("login params", params);
+    const r = await this.post(urls.API_USR_LOGIN, params);
+
     if (r) {
       runInAction(() => {
-        if (params.remember)
-          token.saveUser(r.data)
-        this.usr = r.data[0]
-        // console.log(r.data)
-        // console.log(this.usr)
-      })
-      console.log("判断成功")
-      return r
-    } else {
-      message.error('网络错误', 0.7)
-    }
+        if (r.data && r.code === 200) {
+          if (params.remember) token.saveUser(r.data);
+          this.usr = r.data[0];
+          console.log("userStore", this.usr);
+          message.success(r.msg);
+          console.log("身份是==========", r.data[0].role);
+          //  const history = this.props.history;
 
+          // if (r.data[0].role == 0) history.push("/");
+          // if (r.data[0].role == 2) route("/m", true);
+          // if (r.data[0].role == 1) route("/s", true);
+          // if (r.data[0].role == 3) route("/admin", true);
+        } else if (r.code === 301) {
+          message.error(r.msg);
+        }
+      });
+      console.log("判断成功");
+      return r;
+    } else {
+      message.error("网络错误", 0.7);
+    }
   }
 
   @action
@@ -62,45 +68,47 @@ class User extends BaseActions {
   async downloadFile(params) {
     return await axios({
       url: urls.API_SYS_DOWN_FILE,
-      method: 'POST',
-      responseType: 'blob',
-      data: params
-    }).then(r => {
-      let type = r.headers['content-type'];
-      let data = new Blob([r.data], {
-        type: type
-      })
-      let ext = params.file.split('.').slice(-1);
-      let blobUrl = window.URL.createObjectURL(data);
-      const a = document.createElement('a');
-      a.download = `${params.id}_${params.name}.${ext}`;
-      a.href = blobUrl;
-      a.click();
-      return true;
-    }).catch(e => {
-      return false;
+      method: "POST",
+      responseType: "blob",
+      data: params,
     })
+      .then((r) => {
+        let type = r.headers["content-type"];
+        let data = new Blob([r.data], {
+          type: type,
+        });
+        let ext = params.file.split(".").slice(-1);
+        let blobUrl = window.URL.createObjectURL(data);
+        const a = document.createElement("a");
+        a.download = `${params.id}_${params.name}.${ext}`;
+        a.href = blobUrl;
+        a.click();
+        return true;
+      })
+      .catch((e) => {
+        return false;
+      });
   }
 
   @action
   async getAllMessages(params) {
-    const r = await this.post(urls.API_SYS_GET_MESSAGES, params)
+    const r = await this.post(urls.API_SYS_GET_MESSAGES, params);
     if (r && r.code === 200) {
       if (r.data) {
         runInAction(() => {
-          this.msgList = r.data
-        })
-        return r.data
+          this.msgList = r.data;
+        });
+        return r.data;
       }
     } else {
-      message.error("网络错误")
+      message.error("网络错误");
     }
-    return r
+    return r;
   }
 
   @action
   async readMessages(params) {
-    const r = await this.post(urls.API_SYS_READ_MESSAGES, params)
+    const r = await this.post(urls.API_SYS_READ_MESSAGES, params);
     if (r && r.code === 200) {
       return true;
     }
@@ -108,7 +116,7 @@ class User extends BaseActions {
 
   @action
   setReadStatus(hasUnread) {
-    this.hasUnread = hasUnread
+    this.hasUnread = hasUnread;
   }
 
   @action
@@ -121,17 +129,17 @@ class User extends BaseActions {
       runInAction(() => {
         this.noticeList.index = unreadIndex;
         this.noticeList.data = [...r.data[1], ...r.data[0]];
-      })
-      return (r.data[1].length + r.data[0].length)
+      });
+      return r.data[1].length + r.data[0].length;
     } else {
-      return 0
+      return 0;
       // message.error("网络错误")
     }
   }
 
   @action
   async readNotice(aid) {
-    let params = { uid: this.usr.uid, ann_id: aid }
+    let params = { uid: this.usr.uid, ann_id: aid };
     const r = await this.post(urls.API_SYS_READ_NOTICE, params);
     if (r && r.code === 200) {
       return true;
@@ -144,23 +152,20 @@ class User extends BaseActions {
   // to:admin 管理员; allTea 全体教师; audTea 本系审核教师; topTea 本系课题对应教师; allStu 全体学生; topStu 本系学生
   @action
   async insertMessageToMany(param) {
-    return await this.post(urls.API_SYS_POST_MESSAGETOMANY, param)
+    return await this.post(urls.API_SYS_POST_MESSAGETOMANY, param);
   }
   //状态通知 一对一
   @action
   async insertMessageToOne(param) {
-    return await this.post(urls.API_SYS_POST_MESSAGETOONE, param) 
+    return await this.post(urls.API_SYS_POST_MESSAGETOONE, param);
   }
 
   @action
   logout() {
     token.removeUser();
-    this.usr ={}
-    route("/")
+    this.usr = {};
     
   }
-  
-
 }
 
-export default new User()
+export default new User();

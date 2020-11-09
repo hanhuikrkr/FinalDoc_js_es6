@@ -1,16 +1,22 @@
-import React from 'react'
-import {PageLoading} from './component/PageLoading';
 
-class App extends React.Component {
-	constructor(props) {
-		super(props)
-	}
+import React, { Component } from "react";
+import { Provider } from "mobx-react";
+import ReactDOM from "react-dom";
+import { configure } from "mobx";
+import './style/globalStyle.scss'
+import injects from "./store";
+import App from "./App";
 
-	render() {
-		return (
-			<PageLoading/>
-		)
-	}
-}
 
-export default App
+import "antd/dist/antd.css";
+
+import { ConfigProvider } from "antd";
+import zhCN from "antd/es/locale/zh_CN";
+ReactDOM.render(
+  <Provider {...injects}>
+    <ConfigProvider locale={zhCN}>
+      <App></App>
+    </ConfigProvider>
+  </Provider>,
+  document.getElementById("root")
+)
