@@ -1,9 +1,9 @@
 import userStore from './User'
-import manageStore from './manage'
+import manageStore from './Manage'
 import studentStore from './Student'
-import teacherStore from './teacher'
-import adminStore from './admin'
-import topicStore from './topic'
+import teacherStore from './Teacher'
+import adminStore from './Admin'
+import topicStore from './Topic'
 
 
 export default {

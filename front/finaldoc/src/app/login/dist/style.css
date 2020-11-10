@@ -1,0 +1,141 @@
+[data-component=login] .rootbody {
+  width: 100%;
+  height: 100%;
+}
+[data-component=login] .rootbody .root {
+  margin: 0 auto;
+  width: 1200px;
+  height: 1vh;
+  padding: 0px;
+  display: flex;
+  background-color: white;
+  position: relative;
+}
+[data-component=login] .rootbody .root .fake_background {
+  background-color: #333;
+  align-items: center;
+  align-content: center;
+  width: 741.6px;
+  height: 100vh;
+  margin: 0px;
+  padding: 0px;
+}
+[data-component=login] .rootbody .root .fake_background .cap_logo {
+  width: 230px;
+  height: 21.29vh;
+  background-image: url(../../static/graduate_hat.svg);
+  background-size: 100% 100%;
+  margin: 0 auto;
+  margin-top: 19.9vh;
+}
+[data-component=login] .rootbody .root .fake_background .xiaoxun {
+  width: 457px;
+  height: 4.7vh;
+  background-image: url(../../static/xiaoxun.svg);
+  background-size: 100% 100%;
+  margin: 0 auto;
+  margin-top: 19.9vh;
+}
+[data-component=login] .rootbody .root .right_box {
+  width: 458.4px;
+  height: 100vh;
+  background-color: white;
+  align-content: center;
+  text-align: center;
+}
+[data-component=login] .rootbody .root .right_box .logo_box {
+  width: 458.4px;
+  height: 38.24vh;
+  background-color: #ffffff;
+  align-content: center;
+  text-align: center;
+  align-items: center;
+}
+[data-component=login] .rootbody .root .right_box .logo_box .logo {
+  margin: 0 auto;
+  width: 23.6vh;
+  height: 23.6vh;
+  background-image: url(../../static/logo.svg);
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  position: relative;
+  top: 7.3vh;
+}
+[data-component=login] .rootbody .root .right_box .login_body {
+  background: #fff;
+  width: 458.4px;
+  height: 61.7vh;
+  margin: 0px;
+  padding: 0px;
+  align-content: center;
+  text-align: center;
+}
+[data-component=login] .rootbody .root .right_box .login_body .login_box {
+  width: 458.4px;
+  height: 38.1vh;
+}
+[data-component=login] .rootbody .root .right_box .login_body .login_title {
+  height: 23.6vh;
+  width: 458.4px;
+  align-content: center;
+  text-align: center;
+}
+[data-component=login] .rootbody .root .right_box .login_body .login_title span {
+  position: relative;
+  top: 50%;
+  color: #0585d0;
+}
+[data-component=login] .subit_buttom {
+  position: relative;
+  top: 2vh;
+  left: 42px;
+  width: 358px !important;
+  height: 4.3vh !important;
+  border-radius: 8px;
+  background-color: #0585d0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+[data-component=login] .input_box {
+  width: 358px !important;
+  height: 4.3vh !important;
+  border-radius: 8px;
+}
+[data-component=login] .label-text {
+  position: relative;
+  left: 42px;
+  font-size: 16;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+[data-component=login] .under_sign {
+  display: flex;
+  position: relative;
+  left: 42px;
+  margin-top: 4.3vh;
+}
+[data-component=login] .under_sign .remember {
+  display: flex;
+  position: left;
+  font-size: 16;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  left: 37px;
+  width: 239px;
+  margin-right: 0px;
+}
+[data-component=login] .under_sign .forgot {
+  display: flex;
+  position: relative;
+  left: 10px;
+  font-size: 16;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  width: 220.5px;
+  margin-right: 0px;
+}
+[data-component=login] .url_login {
+  margin-top: 0.55vh;
+}
+[data-component=login] .url_login span {
+  color: #0585d0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
