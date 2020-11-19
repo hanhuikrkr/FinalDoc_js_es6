@@ -38,7 +38,7 @@ class App extends React.Component {
                         exact
                         path="/t_topic_manage"
                         component={Loadable({
-                          loader: () => import("./app/t/manage/index"),
+                          loader: () => import("./app/t/manage/index.jsx"),
                         })}
                       />
                     </Switch>

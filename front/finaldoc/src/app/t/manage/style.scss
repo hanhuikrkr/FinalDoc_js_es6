@@ -1,13 +1,11 @@
-[data-component="t-manage-home"]{
-  .t-manage-home{
-    flex: 4;
-    overflow: auto;
-  }
-
-  
-}
-
-
-.manage-home{
+.t-manage-home {
+  flex: 4;
+  overflow: auto;
   height: 100%;
+  .g-manage-demo-flex {
+    display: flex;
+    &>div {
+      margin: 30px;
+    }
+  }
 }

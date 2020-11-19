@@ -9,7 +9,8 @@
     width: 72px;
     height: 72px;
     transition: 0.3s;
-    box-shadow: 5px 5px 5px #666;
+    box-shadow: 5px 5px 5px #999;
+    
   }
   .g-file-download-card {
     width: 100%;
@@ -22,7 +23,7 @@
       font-size: 12px;
       &:hover {
         .z-file-download-action-xActionChildren {
-           
+           z-index: 3;
           max-height: 360px;
         }
       }
@@ -36,6 +37,7 @@
        
       }
       .z-file-download-action-xActionChildren {
+        z-index: 3;
         box-sizing: border-box;
         position: absolute;
         display: block;
@@ -58,7 +60,7 @@
             background-color: #ffffff;
             transition: background-color 0.3s;
             &:hover {
-              background-color: rgba(212, 212, 212, 0.2);
+              background-color: #0586d038;
             }
           }
         }
@@ -67,8 +69,8 @@
 
     .m-file-download-content {
       width: 100%;
-      height: 61%;
-    margin-top: 20%;
+      height: 85%;
+    margin-top: 10%;
       font-size: 4px;
       svg {
         font-size: 4px;

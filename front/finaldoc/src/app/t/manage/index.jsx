@@ -14,6 +14,8 @@ import Upload from "../../../component/Upload";
 import ReTooltip from "../../../component/Tooltip";
 import FileUpload from "../../../component/FileUpload";
 import FileDownload from "../../../component/FileDownload";
+import "./style.scss";
+
 //将收到的topic数据映射为可以展示的列表
 const filter = (t) => {
   t = {
@@ -115,7 +117,7 @@ class teacherTopicManage extends Component {
   render() {
     const { visible, modelVisiable } = this.state;
     return (
-      <div className="manage-home" data-component="t-manage-home">
+      <div className="t-manage-home">
         <h1>此页面暂时用于摆放各组件的ui使用实例</h1>
         <h2>已完成</h2>
 
@@ -153,6 +155,7 @@ class teacherTopicManage extends Component {
           title="模态框组件"
           visible={modelVisiable}
           onCancel={this.closeModel}
+          onOk={this.closeModel}
         >
           <p>模态框组件</p>
           <p>模态框组件</p>
@@ -197,7 +200,7 @@ class teacherTopicManage extends Component {
         <Tag>随机颜色的tag</Tag>
         <Tag>随机颜色的tag</Tag>
         <br></br>
-        <Switch size={2} />
+        <Switch size={3} />
         <br></br>
         <input type="password"></input>
         <br></br>
@@ -215,15 +218,26 @@ class teacherTopicManage extends Component {
             Retooltip
           </div>
         </ReTooltip>
-        <FileUpload
-          action="http://www.hanhuikrkr.com:8090/uploadtest"
-          accept=".txt,.doc"
-          size={0.1}
-          onSuccess={this.onSuccess}
-          onError={this.onError}
-        ></FileUpload>
-        <FileDownload fileTitle="wenjianm" fileType=".doc"></FileDownload>
-        
+        <div className="g-manage-demo-flex">
+          <div>
+          <FileUpload
+            action="http://www.hanhuikrkr.com:8090/uploadtest"
+            accept=".txt,.doc"
+            size={0.1}
+            onSuccess={this.onSuccess}
+            onError={this.onError}
+          ></FileUpload>
+          </div>
+          <div>
+          <FileDownload fileType=".doc"></FileDownload>
+          </div>
+          <div>
+          <FileDownload  fileType=".pdf"></FileDownload>
+          </div>
+          <div>
+          <FileDownload ></FileDownload>
+          </div>
+        </div>
       </div>
     );
   }

@@ -13,7 +13,7 @@ import "./index.scss";
  */
 function FileDownload(props) {
   let { fileTitle, fileType, onDelete, onDownload } = props;
-  let fileType_icon = "none";
+  let fileType_icon = "iconillustration_XESFile";
   switch (fileType) {
     case ".doc":
     case ".docx":

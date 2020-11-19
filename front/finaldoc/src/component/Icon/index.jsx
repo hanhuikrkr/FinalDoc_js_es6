@@ -4,7 +4,7 @@ import propsTypes from 'prop-types';
 import './icon.scss';
 
 const scriptElem = document.createElement('script');
-scriptElem.src = '//at.alicdn.com/t/font_2213074_yli3jzu1v6r.js';
+scriptElem.src = '//at.alicdn.com/t/font_2213074_s8idc2u5uzj.js';
 document.body.appendChild(scriptElem);
 
 function SimpleIcon({ classname,type, name, ...restProps }) {
