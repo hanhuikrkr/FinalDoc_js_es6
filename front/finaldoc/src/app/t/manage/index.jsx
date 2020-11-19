@@ -202,20 +202,20 @@ class teacherTopicManage extends Component {
         <br></br>
         <Switch size={3} />
         <br></br>
-        <input type="password"></input>
+        
         <br></br>
         <Upload
           action="http://www.hanhuikrkr.com:8090/uploadtest"
           accept=".txt,.doc"
           size={0.1}
         >
-          <div>上传txt或者doc</div>
+          <div>上传功能测试：上传txt或者doc</div>
         </Upload>
         <ReTooltip overlay="text">
           <div
             style={{ backgroundColor: "grey", height: "6opx", width: "100px" }}
           >
-            Retooltip
+            文字提醒测试
           </div>
         </ReTooltip>
         <div className="g-manage-demo-flex">
@@ -230,12 +230,21 @@ class teacherTopicManage extends Component {
           </div>
           <div>
           <FileDownload fileType=".doc"></FileDownload>
+          Word类型文件
           </div>
           <div>
           <FileDownload  fileType=".pdf"></FileDownload>
+          Pdf类型文件
           </div>
+         
+          <div>
+          <FileDownload  fileType=".xls"></FileDownload>
+          Excel类型文件
+          </div>
+
           <div>
           <FileDownload ></FileDownload>
+          默认类型文件
           </div>
         </div>
       </div>
