@@ -7,7 +7,13 @@ import Button from "../../../component/Button";
 import Drawer from "../../../component/DrawerBox";
 import Card from "../../../component/Card/index";
 import Modal from "../../../component/Modal";
-
+import reNotification from "../../../component/Notification";
+import Tag from "../../../component/Tag";
+import Switch from "../../../component/Switch";
+import Upload from "../../../component/Upload";
+import ReTooltip from "../../../component/Tooltip";
+import FileUpload from "../../../component/FileUpload";
+import FileDownload from "../../../component/FileDownload";
 //将收到的topic数据映射为可以展示的列表
 const filter = (t) => {
   t = {
@@ -56,6 +62,22 @@ class teacherTopicManage extends Component {
    * 显示右侧抽屉，并根据ID自动赋值
    * @param {int} id 课题ID
    */
+  onSuccess = () => {
+    reNotification.pop({
+      duration: 5,
+
+      message: "文件上传成功",
+      description: "onSuccessonSuccessonSuccessonSuccess",
+    });
+  };
+  onError = () => {
+    reNotification.pop({
+      duration: 5,
+
+      message: "文件上传错误",
+      description: "onErroronErroronErroronErroronError",
+    });
+  };
   showDrawer = () => {
     this.setState({
       visible: true,
@@ -74,6 +96,15 @@ class teacherTopicManage extends Component {
   closeModel = () => {
     this.setState({
       modelVisiable: false,
+    });
+  };
+
+  showreNotification = (type) => {
+    reNotification.pop({
+      duration: 5,
+      type: type,
+      message: type,
+      description: `${type} ${type} ${type}`,
     });
   };
   /**
@@ -129,6 +160,70 @@ class teacherTopicManage extends Component {
           <p>模态框组件</p>
           <p>模态框组件</p>
         </Modal>
+        <Button
+          type="warning"
+          width="30vh"
+          onClick={() => this.showreNotification("warning")}
+        >
+          warining Notification
+        </Button>
+        <br></br>
+        <Button
+          type="pureWhite"
+          width="30vh"
+          onClick={() => this.showreNotification("info")}
+        >
+          info Notification
+        </Button>
+        <br></br>
+        <Button
+          type="error"
+          width="30vh"
+          onClick={() => this.showreNotification("error")}
+        >
+          error Notification
+        </Button>
+        <br></br>
+        <Button width="30vh" onClick={() => this.showreNotification("success")}>
+          success Notification
+        </Button>
+        <br></br>
+
+        <Tag>随机颜色的tag</Tag>
+        <Tag>随机颜色的tag</Tag>
+        <Tag>随机颜色的tag</Tag>
+        <Tag>随机颜色的tag</Tag>
+        <Tag>随机颜色的tag</Tag>
+        <Tag>随机颜色的tag</Tag>
+        <Tag>随机颜色的tag</Tag>
+        <br></br>
+        <Switch size={2} />
+        <br></br>
+        <input type="password"></input>
+        <br></br>
+        <Upload
+          action="http://www.hanhuikrkr.com:8090/uploadtest"
+          accept=".txt,.doc"
+          size={0.1}
+        >
+          <div>上传txt或者doc</div>
+        </Upload>
+        <ReTooltip overlay="text">
+          <div
+            style={{ backgroundColor: "grey", height: "6opx", width: "100px" }}
+          >
+            Retooltip
+          </div>
+        </ReTooltip>
+        <FileUpload
+          action="http://www.hanhuikrkr.com:8090/uploadtest"
+          accept=".txt,.doc"
+          size={0.1}
+          onSuccess={this.onSuccess}
+          onError={this.onError}
+        ></FileUpload>
+        <FileDownload fileTitle="wenjianm" fileType=".doc"></FileDownload>
+        
       </div>
     );
   }

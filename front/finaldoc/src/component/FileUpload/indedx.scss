@@ -1,0 +1,40 @@
+.g-file-upload {
+  width: 68px;
+  height: 68px;
+  display: flex;
+
+  border: 4px #666 dashed;
+  transition: 1s;
+  .m-file-upload {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center; /*定义body的元素垂直居中*/
+    justify-content: center; /*定义body的里的元素水平居中*/
+    margin: auto 0;
+
+    .m-file-icon {
+      
+      svg {
+        transition: 1s;
+        font-size: 40px;
+      }
+    }
+  }
+  &:hover {
+    border: 4px #0585d0 dashed;
+    transition: 0.3s;
+    box-shadow: 5px 5px 5px #666;
+    .m-file-upload {
+      .m-file-icon {
+      
+        svg {
+          transition: 0.3s;
+          font-size: 40px;
+          color: #0585d0;
+          
+        }
+      }
+    }
+  }
+}

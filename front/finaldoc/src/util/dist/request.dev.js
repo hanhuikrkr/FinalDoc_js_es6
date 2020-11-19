@@ -1,10 +1,21 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+
+var _umiRequest = require("umi-request");
+
+var _Notification = _interopRequireDefault(require("../component/Notification"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
 /**
  * request 网络请求工具
  * 更详细的 api 文档: https://github.com/umijs/umi-request
  */
-import { extend } from 'umi-request';
-import reNotification  from '../component/Notification';
-const codeMessage = {
+var codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
   202: '一个请求已经进入后台排队（异步任务）。',
@@ -19,27 +30,29 @@ const codeMessage = {
   500: '服务器发生错误，请检查服务器。',
   502: '网关错误。',
   503: '服务不可用，服务器暂时过载或维护。',
-  504: '网关超时。',
+  504: '网关超时。'
 };
 /**
  * 异常处理程序
  */
 
-const errorHandler = (error) => {
-  const { response } = error;
+var errorHandler = function errorHandler(error) {
+  var response = error.response;
 
   if (response && response.status) {
-    const errorText = codeMessage[response.status] || response.statusText;
-    const { status, url } = response;
-    reNotification.pop({
-      type:"warning",
-      message: `请求错误 ${status}`,
-      description: errorText,
+    var errorText = codeMessage[response.status] || response.statusText;
+    var status = response.status,
+        url = response.url;
+
+    _Notification["default"].pop({
+      type: "warning",
+      message: "\u8BF7\u6C42\u9519\u8BEF ".concat(status),
+      description: errorText
     });
   } else if (!response) {
-    reNotification.pop({
+    _Notification["default"].pop({
       description: '您的网络发生异常，无法连接服务器',
-      message: '网络异常',
+      message: '网络异常'
     });
   }
 
@@ -49,9 +62,12 @@ const errorHandler = (error) => {
  * 配置request请求时的默认参数
  */
 
-const request = extend({
-  errorHandler,
+
+var request = (0, _umiRequest.extend)({
+  errorHandler: errorHandler,
   // 默认错误处理
-  credentials: 'omit', // 默认请求是否带上cookie
+  credentials: 'omit' // 默认请求是否带上cookie
+
 });
-export default request;
+var _default = request;
+exports["default"] = _default;

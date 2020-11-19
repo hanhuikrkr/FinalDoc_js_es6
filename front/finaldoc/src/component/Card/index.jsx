@@ -62,38 +62,7 @@ function Card(props) {
   );
 }
 
-//   return _react.default.createElement("div", {
-//     className: (0, _classnames.default)('xCardWrap', className),
-//     style: style
-//   }, _react.default.createElement("div", {
-//     className: "xCardHeader",
-//     style: headStyle
-//   }, _react.default.createElement("div", {
-//     className: "xCardHeaderTit"
-//   }, title),
-//   !!action.length && _react.default.createElement("div", {
-//     className: "xAction"
-//   }, _react.default.createElement(_Icon.default, {
-//     type: "FaEllipsisH",
-//     style: {
-//       fontSize: '10px',
-//       color: 'rgba(0,0,0,.5)',
-//       cursor: 'pointer'
-//     }
-//   }), _react.default.createElement("div", {
-//     className: "xActionChildren"
-//   }, _react.default.createElement("div", {
-//     className: "xActionChildrenBox"
-//   }, action.map(function (item, i) {
-//     return _react.default.createElement("div", {
-//       key: i,
-//       className: "xActionItem"
-//     }, item);
-//   }))))), _react.default.createElement("div", {
-//     className: "xCardContent",
-//     style: contentStyle
-//   }, children));
-// }
+
 
 Card.propTypes = {
   style: PropTypes.object,

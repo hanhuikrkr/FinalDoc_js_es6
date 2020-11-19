@@ -1,11 +1,12 @@
-import React from 'react';
-import { useState, useEffect } from 'react'
-import Button from '../Button'
-import closeIcon from './close.svg'
-import PropTypes from 'prop-types'
-import './index.scss'
+import React from "react";
+import { useState, useEffect } from "react";
+import Button from "../Button";
+import closeIcon from "./close.svg";
+import PropTypes from "prop-types";
+import "./index.scss";
+import classnames from 'classnames'
 
-let hiddenCount = 0
+let hiddenCount = 0;
 /**
  * Modal Modal组件
  * @param {afterClose} func Modal完全关闭后的回调
@@ -31,8 +32,8 @@ function Modal(props) {
   const {
     afterClose,
     bodyStyle,
-    cancelText = '取消',
-    centered,
+    cancelText = "取消",
+    centered = true,
     closable = true,
     closeIcon,
     destroyOnClose,
@@ -41,154 +42,151 @@ function Modal(props) {
     mask = true,
     maskclosable = true,
     maskStyle,
-    okText = '确认',
+    okText = "确认",
     title,
     visible = false,
-    width = '520px',
+    width = "800px",
     onCancel,
     onOk,
-    children
-  } = props
+    children,
+    height="600px",
+  } = props;
 
-  let [isHidden, setHidden] = useState(!visible)
-  let [destroyChild, setDestroyChild] = useState(false)
+  let [isHidden, setHidden] = useState(!visible);
+  let [destroyChild, setDestroyChild] = useState(false);
 
   const hiddenModal = (cb) => {
     setHidden(() => {
-      cb && cb()
-      return true
-    })
-    if(destroyOnClose) {
-      setDestroyChild(true)
+      cb && cb();
+      return true;
+    });
+    if (destroyOnClose) {
+      setDestroyChild(true);
     }
-    document.body.style.overflow = 'auto'
-  }
+    document.body.style.overflow = "auto";
+  };
 
   const handleClose = () => {
-    hiddenModal(onCancel)
-  }
+    hiddenModal(onCancel);
+  };
 
   const handleOk = () => {
-    hiddenModal(onOk)
-  }
+    hiddenModal(onOk);
+  };
 
   const toggle = () => {
-    setHidden(prev => !prev)
-  }
+    setHidden((prev) => !prev);
+  };
 
   const closeModal = function (event) {
-    let e = event || window.event || arguments.callee.caller.arguments[0]
-    if (e && e.keyCode === 27) { 
-      handleClose()
+    let e = event || window.event || arguments.callee.caller.arguments[0];
+    if (e && e.keyCode === 27) {
+      handleClose();
     }
-  }
+  };
 
   useEffect(() => {
-    if(isHidden && hiddenCount) {
-      hiddenCount = 0
-      afterClose && afterClose()
+    if (isHidden && hiddenCount) {
+      hiddenCount = 0;
+      afterClose && afterClose();
     }
-    hiddenCount = 1
-  }, [isHidden])
+    hiddenCount = 1;
+  }, [isHidden]);
 
   useEffect(() => {
-    if(!isHidden) {
-      document.body.style.overflow = 'hidden'
+    if (!isHidden) {
+      document.body.style.overflow = "hidden";
     }
-  }, [isHidden])
+  }, [isHidden]);
 
   useEffect(() => {
-    if(visible) {
-      if(destroyOnClose) {
-        setDestroyChild(true)
+    if (visible) {
+      if (destroyOnClose) {
+        setDestroyChild(true);
       }
     }
-    setHidden(!visible)
-  }, [visible, destroyOnClose])
+    setHidden(!visible);
+  }, [visible, destroyOnClose]);
 
   useEffect(() => {
-    keyboard && document.addEventListener('keydown', closeModal, false)
+    keyboard && document.addEventListener("keydown", closeModal, false);
     return () => {
-      keyboard && document.removeEventListener('keydown', closeModal, false)
-    }
-  }, [])
+      keyboard && document.removeEventListener("keydown", closeModal, false);
+    };
+  }, []);
 
-  return <div className="xModalWrap" style={{display: isHidden ? 'none' : 'block'}}>
-    <div 
-      className={`xModalContent${centered ? ' xCentered' : ''}`}
-      style={{
-        width
-      }}
+  return (
+    <div
+      className={classnames('xModalWrap', isHidden ? 'out' : '')}
     >
-      <div className="xModalHeader">
-        <div className="xModalTitle">
-          { title }
+      <div
+        className={`xModalContent${centered ? " xCentered" : ""}`}
+        style={{
+          width,height
+        }}
+      >
+        <div className="xModalHeader">
+          <div className="xModalTitle">{title}</div>
         </div>
-      </div>
-      {
-        closable && 
-        <span className="xModalCloseBtn" onClick={handleClose}>
-          { closeIcon || <img src={closeIcon}/> }
-        </span>
-      }
-      <div className="xModalBody" style={bodyStyle}>
-        { destroyChild ? null : children }
-      </div>
-      {
-        footer === null ? null :
+        {closable && (
+          <span className="xModalCloseBtn" onClick={handleClose}>
+            {closeIcon || <img src={closeIcon} />}
+          </span>
+        )}
+        <div className="xModalBody" style={bodyStyle}>
+          {destroyChild ? null : children}
+        </div>
+        {footer === null ? null : (
           <div className="xModalFooter">
-            {
-              footer ? footer :
-                <div className="xFooterBtn">
-                  <Button className="xFooterBtnCancel" onClick={handleClose} type="pure">{ cancelText }</Button>
-                  <Button className="xFooterBtnOk" onClick={handleOk}>{ okText }</Button>
-                </div>
-            }
+            {footer ? (
+              footer
+            ) : (
+              <div className="xFooterBtn">
+                <Button
+                  className="xFooterBtnCancel"
+                  onClick={handleClose}
+                  type="pure"
+                >
+                  {cancelText}
+                </Button>
+                <Button className="xFooterBtnOk" onClick={handleOk}>
+                  {okText}
+                </Button>
+              </div>
+            )}
           </div>
-      }
-    </div>
-    {
-      mask && <div 
-        className="xModalMask" 
-        style={maskStyle} 
-        onClick={maskclosable && handleClose}>
+        )}
       </div>
-    }
-  </div> 
+      {mask && (
+        <div
+          className="xModalMask"
+          style={maskStyle}
+          onClick={maskclosable && handleClose}
+        ></div>
+      )}
+    </div>
+  );
 }
 
 Modal.propTypes = {
   afterClose: PropTypes.func,
   bodyStyle: PropTypes.object,
-  cancelText: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element
-  ]),
+  cancelText: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   centered: PropTypes.bool,
   closable: PropTypes.bool,
   closeIcon: PropTypes.element,
   destroyOnClose: PropTypes.bool,
-  footer: PropTypes.oneOfType([
-    PropTypes.element,
-    PropTypes.object
-  ]),
+  footer: PropTypes.oneOfType([PropTypes.element, PropTypes.object]),
   keyboard: PropTypes.bool,
   mask: PropTypes.bool,
   maskclosable: PropTypes.bool,
   maskStyle: PropTypes.object,
-  okText: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element
-  ]),
-  title: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.element
-  ]),
+  okText: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   visible: PropTypes.bool,
   width: PropTypes.string,
   onCancel: PropTypes.func,
-  onOk: PropTypes.func
-}
+  onOk: PropTypes.func,
+};
 
-export default Modal
-
+export default Modal;
